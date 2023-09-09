@@ -56,7 +56,7 @@ Converts the output from compiler, to binary language which are further fed to t
 <summary>
 SoC design and OpenLane
 </summary>
-</details>
+
 
 **Introduction to all components of open-source digital ASIC design**
 
@@ -65,6 +65,7 @@ SoC design and OpenLane
 **Introduction to OpenLane and Strive Chipsets**
 
 **Introduction to OpenLane detailed ASIC design flow**
+</details>
 
 <details>
 <summary>
