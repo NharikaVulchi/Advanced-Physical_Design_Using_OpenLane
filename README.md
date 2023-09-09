@@ -60,6 +60,25 @@ SoC design and OpenLane
 
 **Introduction to all components of open-source digital ASIC design**
 
+Digital ASIC design basic elements:
+
+
+1. RTL IP's (Register Transfer Level Intellectual Property ):RTL IPs are pre-designed and pre-verified building blocks of digital logic circuits. These blocks are created using hardware description languages (HDLs) like Verilog or VHDL. RTL IPs can include components such as adders, multiplexers, flip-flops, memory blocks, and more.
+2. EDA tools (Electronic Design Automation) : EDA tools are software applications that facilitate the design, analysis, simulation, and verification of electronic circuits and systems. In ASIC design, EDA tools are essential for tasks like RTL synthesis, logic optimization, floor planning, placement, routing, and timing analysis. These tools help automate many aspects of the design process, improve design productivity, and ensure that the ASIC meets its performance and power consumption requirements.
+3. PDK Data (process design kits) :Collection of files to model a fabrication process for the EDA tools used to design an IC. Few of them are device models, digital standard cell libraries, I/O libraries.
+
+
+**Opensource RTL Designs: github, librecores, opencores**
+
+**Opensource EDA tools: QFlow, OpenROAD, OpenLANE**
+
+**Opensource PDK data: Google Skywater130 PDK**
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/96edde63-0411-4c58-85cb-cd8b04b2e50c)
+
+
+
+
 **Simplified RTL2GDS flow**
 
 **Introduction to OpenLane and Strive Chipsets**
