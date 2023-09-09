@@ -29,7 +29,7 @@ The chip design process begins with conceptualization, where the designers outli
 
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/5c893594-2d1b-4f11-a151-d4d4e795aeea)
 
-</details>
+
 
 **Introduction to RISC-V**
 
@@ -50,6 +50,7 @@ Assembler
 
 Converts the output from compiler, to binary language which are further fed to the hardware.
 
+</details>
 
 <details>
 <summary>
