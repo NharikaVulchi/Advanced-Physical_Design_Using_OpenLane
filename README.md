@@ -31,10 +31,8 @@ The chip design process begins with conceptualization, where the designers outli
 
 </details>
 
-<details>
-<summary>
-Introduction to RISC-V
-</summary>
+**Introduction to RISC-V**
+
 
 RISC-V is an open-source instruction set architecture (ISA) designed with simplicity and versatility. It features a modular structure, enabling custom extensions for diverse applications. Its load-store memory model and compact register set streamline execution. Privilege levels ensure secure operation. RISC-V suits embedded systems to high-performance computing, fostering innovation through open collaboration and customization. It is a 64 bit architecture.
 
@@ -51,4 +49,131 @@ Converts the high level language to respective instruction set which are hardwar
 Assembler
 
 Converts the output from compiler, to binary language which are further fed to the hardware.
+
+
+<details>
+<summary>
+SoC design and OpenLane
+</summary>
 </details>
+
+**Introduction to all components of open-source digital ASIC design**
+
+**Simplified RTL2GDS flow**
+
+**Introduction to OpenLane and Strive Chipsets**
+
+**Introduction to OpenLane detailed ASIC design flow**
+
+<details>
+<summary>
+Get familiar to open-source EDA tools
+</summary>
+
+**OpenLane Directory Structure in Detail**
+
+**Design Preparation Step**
+
+**Review files after design prep and run synthesis**
+
+**OpenLane project Git link description**
+
+**Steps to characterize synthesis results**
+
+
+</details>
+
+
+## DAY 2 Floor planning and Introduction to Library Cells
+
+<details>
+<summary>
+Chip floor planning considerations
+</summary>
+</details>
+
+<details>
+<summary>
+Library Binding and Placement
+</summary>
+</details>
+
+<details>
+<summary>
+Cell design and characterization flows
+</summary>
+</details>
+
+<details>
+<summary>
+General timing characterization parameters
+</summary>
+</details>
+
+## DAY 3 Library Cell using Magic Layout and ngspice characterization
+
+<details>
+<summary>
+Labs for CMOS inverter ngspice simulations
+</summary>
+</details>
+
+<details>
+<summary>
+Inception of layout A CMOS fabrication process
+</summary>
+</details>
+
+<details>
+<summary>
+Sky130 Tech File Labs
+</summary>
+</details>
+
+
+## DAY 4 Pre-layout timing analysis and importance of good clock tree
+
+<details>
+<summary>
+Timing modeling using delay tables
+</summary>
+</details>
+
+<details>
+<summary>
+Timing analysis with ideal clocks using OpenSTA
+</summary>
+</details>
+
+<details>
+<summary>
+Clock tree synthesis TritonCTS and signal integrity
+</summary>
+</details>
+
+<details>
+<summary>
+Timing analysis with real clocks using OpenSTA
+</summary>
+</details>
+
+## DAY 5 Final steps for RTL2GDS using tritonRoute and openSTA
+
+<details>
+<summary>
+Routing and Design Rule Check(DRC)
+</summary>
+</details>
+
+<details>
+<summary>
+Power Distribution Networking and Routing
+</summary>
+</details>
+
+<details>
+<summary>
+TritonRoute Features
+</summary>
+</details>
+
