@@ -8,7 +8,7 @@
 Introduction to package, chips and ICs
 </summary>
 
-Processor interfaces all the instructions that are performed on the board(micro-controller).
+The chip design process begins with conceptualization, where the designers outline the high-level functionality, goals, and specifications of the chip.Processor interfaces all the instructions that are performed on the board(micro-controller).
 
 
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/2b3cf20b-89a0-402a-b10c-83f26b25a103)
@@ -31,3 +31,8 @@ Processor interfaces all the instructions that are performed on the board(micro-
 
 </details>
 
+<details>
+<summary>
+Introduction to RISC-V
+</summary>
+</details>
