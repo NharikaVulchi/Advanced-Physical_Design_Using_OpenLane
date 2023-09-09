@@ -2,6 +2,12 @@
 ## DAY 1 Introduction to open-source EDA , OpenLane and Sky130 PDK
 
 
+<details>
+  
+<summary>
+Introduction to package, chips and ICs
+</summary>
+
 Processor interfaces all the instructions that are performed on the board(micro-controller).
 
 
@@ -23,5 +29,5 @@ Processor interfaces all the instructions that are performed on the board(micro-
 
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/5c893594-2d1b-4f11-a151-d4d4e795aeea)
 
-
+</details>
 
