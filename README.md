@@ -122,6 +122,8 @@ Major steps in RTL to GDS flow are described below:
 **Introduction to OpenLane and striVe Chipsets**
 
 * OpenLane is an open-source digital integrated circuit (IC) design flow and toolchain that helps automate the process of designing and manufacturing custom semiconductor chips or integrated circuits.
+  
+* Using OpenLane we produce a GDS with no human intervention that has no LVS violations, no DRc violations and no timing violations
 
 * OpenLane is developed as an open-source project, which means that the source code and associated tools are freely available for anyone to use, modify, and contribute to. 
   
@@ -131,9 +133,27 @@ Major steps in RTL to GDS flow are described below:
 
   ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/6d21b9eb-4cb4-4f61-9070-55a933be9aaa)
 
+* OpenLane can be used to harden macros and chips
 
+* There are 2 modes of operation : automative and interactive
 
+ 
 **Introduction to OpenLane detailed ASIC design flow**
+
+
+The below figure depicts OpenLane ASIC design flow
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/52e5e502-8322-4237-83f2-cd922df0d03b)
+
+
+Best optimisation strategy is decided accordingly.
+
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/ad742388-bdfd-491c-8982-77bd14b3c80d)
+
+design exploration is a major step in Openlane where it tests the design on various metrics
+
+
 </details>
 
 <details>
