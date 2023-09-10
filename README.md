@@ -84,18 +84,47 @@ Digital ASIC design basic elements:
 Major steps in RTL to GDS flow are described below:
 
 
+
+
 1. **Synthesis** : Design is translated to circuits made of components which are the logic cells. Eah stndard cell have a regular layout. Cell width is variable and discrete . Each cell has different views which comes with the EDA tools.RTL code is transformed into a gate-level netlist using synthesis tools. These tools map RTL constructs into specific gates and optimize the design for area, power, and speed.
 
 2. **Floor and power planning** : Planning the silicon area on which we fabricate our design to create robust power distribution. Rows, pin locations and routing tracks are designed here. In power planning, power pins are connected to all the cells through power straps, pads and rings.
 
-3. Placement : Gate level netlist cells are placed on the rows such that interconnect delay is reduced and to enable better routing. This is done in 2 steps:
+3. **Placement** : Gate level netlist cells are placed on the rows such that interconnect delay is reduced and to enable better routing. This is done in 2 steps:
        --> Global placement : Finds the optimal positions for all cells, which can nvolve cell overlapping
        --> Detailed placement : Positions are minimally altered to their fixed positions
 
-4. Clock Tree Synthesis : After the placement , we deliver clock to all the cell components 
+4. **Clock Tree Synthesis** : After the placement , we deliver clock to all the cell components by creating the clock distribution network. The clock network is in the shape of a tree, with the clock as node and all the elements as leaves. The clock should be delivered to all the cells with minimum skew and latency. Clock Skew means the arrival of time at different cells at different times.
+
+   
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/412c6693-771d-446c-b6e4-fdaa40bd18a1)
+
+5. Routing : After placing the cells, the next step is signal routing. A valid pattern of horizontal and vertical wires is found to interconnect the cells. The router uses available metal layers defined by EDA. Finite width and pitch is defined for the metal layers. Skywater130 PDK defines 6 different metal layers. Lowest layer is the local interconnect layer, its the titanium nitride layers. The other 5 layers are aluminium layers.Most routers are grid routers. Divide and conquer approach is used for routing
+
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/646822f6-47fa-45b9-90df-0b107e425b31)
+
+
+6. Sign off: After routing the chip undergoes verification process.
+     * Physical verification
+             --> Design Rule Checking (DRC)
+             --> layout vs Schematic (LVS)
+     * Timing Verification
+             --> Static Timing Analysis (STA)
+
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/0a8cc960-33bc-4af9-b180-54b7d43b4dd8)
+
 
 
 **Introduction to OpenLane and Strive Chipsets**
+
+* OpenLane is an open-source digital integrated circuit (IC) design flow and toolchain that helps automate the process of designing and manufacturing custom semiconductor chips or integrated circuits.
+
+* OpenLane is developed as an open-source project, which means that the source code and associated tools are freely available for anyone to use, modify, and contribute to. 
+  
+* 
+
 
 **Introduction to OpenLane detailed ASIC design flow**
 </details>
