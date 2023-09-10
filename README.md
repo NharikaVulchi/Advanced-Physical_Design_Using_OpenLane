@@ -105,7 +105,7 @@ Major steps in RTL to GDS flow are described below:
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/646822f6-47fa-45b9-90df-0b107e425b31)
 
 
-6. Sign off: After routing the chip undergoes verification process.
+6. **Sign off**: After routing the chip undergoes verification process.
      * Physical verification
              --> Design Rule Checking (DRC)
              --> layout vs Schematic (LVS)
@@ -114,6 +114,8 @@ Major steps in RTL to GDS flow are described below:
 
 
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/0a8cc960-33bc-4af9-b180-54b7d43b4dd8)
+
+
 
 
 
