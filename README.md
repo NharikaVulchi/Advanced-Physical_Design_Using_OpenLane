@@ -81,6 +81,20 @@ Digital ASIC design basic elements:
 
 **Simplified RTL2GDS flow**
 
+Major steps in RTL to GDS flow are described below:
+
+
+1. **Synthesis** : Design is translated to circuits made of components which are the logic cells. Eah stndard cell have a regular layout. Cell width is variable and discrete . Each cell has different views which comes with the EDA tools.RTL code is transformed into a gate-level netlist using synthesis tools. These tools map RTL constructs into specific gates and optimize the design for area, power, and speed.
+
+2. **Floor and power planning** : Planning the silicon area on which we fabricate our design to create robust power distribution. Rows, pin locations and routing tracks are designed here. In power planning, power pins are connected to all the cells through power straps, pads and rings.
+
+3. Placement : Gate level netlist cells are placed on the rows such that interconnect delay is reduced and to enable better routing. This is done in 2 steps:
+       --> Global placement : Finds the optimal positions for all cells, which can nvolve cell overlapping
+       --> Detailed placement : Positions are minimally altered to their fixed positions
+
+4. Clock Tree Synthesis : After the placement , we deliver clock to all the cell components 
+
+
 **Introduction to OpenLane and Strive Chipsets**
 
 **Introduction to OpenLane detailed ASIC design flow**
