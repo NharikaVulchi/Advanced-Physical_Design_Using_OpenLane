@@ -202,7 +202,10 @@ Circuit Validity Checker: CVC (for circuit validity checking).
 Get familiar to open-source EDA tools
 </summary>
 
-**OpenLane Directory Structure in Detail**
+
+
+
+
 
 **Design Preparation Step**
 
