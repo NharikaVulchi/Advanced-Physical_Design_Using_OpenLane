@@ -146,12 +146,53 @@ The below figure depicts OpenLane ASIC design flow
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/52e5e502-8322-4237-83f2-cd922df0d03b)
 
 
-Best optimisation strategy is decided accordingly.
+Synthesis Exploration : Best optimisation strategy is decided 
 
 
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/ad742388-bdfd-491c-8982-77bd14b3c80d)
 
-design exploration is a major step in Openlane where it tests the design on various metrics
+Design exploration is a major step in Openlane where it tests the design on various metrics. OpenLane runs on 70 designs and compare the results to the best ones.
+
+Testing :
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/1969f499-eea0-47a5-88d6-60ece938a8f4)
+
+OpenRoad does the physical implementation: Placement and routing.
+
+Netlist after the optimization is compared to the gate level netlist to ensure that they are functionally equivalent
+
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/736d7883-ee6e-4e2b-907e-795a8c55f264)
+
+
+RTL Synthesis, Technology Mapping, and Formal Verification:  Yosys (for RTL synthesis), ABC (for technology mapping and formal verification).
+
+Static Timing Analysis:OpenSTA (for static timing analysis).
+
+Floor Planning: init_fp (initial floorplanning), ioPlacer (I/O placement), pdn (power distribution network planning), tapcell (tap cell insertion).
+
+Placement: RePLace (global placement), Resizer (optional for resizing cells), OpenPhySyn (formerly used for placement), OpenDP (detailed placement).
+
+Clock Tree Synthesis: TritonCTS (for clock tree synthesis).
+
+Fill Insertion: OpenDP (for filler placement).
+
+Routing:
+   Global Routing: FastRoute or CU-GR (formerly used).
+  Detailed Routing: TritonRoute (for detailed routing) or DR-CU (formerly used).
+
+SPEF Extraction: OpenRCX (or SPEF-Extractor, formerly used) for Standard Parasitic Exchange Format (SPEF) extraction.
+
+GDSII Streaming Out: Magic and KLayout (for viewing and editing GDSII files).
+
+Design Rule Checking (DRC) Checks: Magic and KLayout (for DRC checks).
+
+Layout vs. Schematic (LVS) Check: Netgen (for LVS checks).
+
+Antenna Checks: Magic (for antenna checks).
+
+Circuit Validity Checker: CVC (for circuit validity checking).
+
 
 
 </details>
