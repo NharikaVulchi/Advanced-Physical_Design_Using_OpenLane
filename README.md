@@ -209,6 +209,47 @@ Get familiar to open-source EDA tools
 
 **Design Preparation Step**
 
+
+Installing Openlane 
+
+```
+cd $HOME
+git clone https://github.com/The-OpenROAD-Project/OpenLane --recurse-submodules 
+cd OpenLane
+make
+make test
+cd /home/niharika/OpenLane/designs/ci
+cp -r * ../
+```
+
+
+Invoking Openlane
+
+```
+cd ~/OpenLane
+make mount
+./flow.tcl -interactive
+package require openlane 0.9
+prep -design picorv32a
+run_synthesis
+```
+
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/37769e8a-4334-4cbe-a8da-232d4fe3a6e4)
+
+
+Viewing the netlist file generated for **picorv32**
+
+![Screenshot from 2023-09-11 15-33-14](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/87315fe6-aab7-4161-9765-afdf00dbaad6)
+
+
+![Screenshot from 2023-09-11 15-32-59](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/2cd0464d-7bc9-4cc2-8f10-bcb39580e07d)
+
+
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/bd5801d5-d333-4ef4-b3f8-10222f9049f9)
+
+
 **Review files after design prep and run synthesis**
 
 **OpenLane project Git link description**
