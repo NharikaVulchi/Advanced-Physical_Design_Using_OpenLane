@@ -277,9 +277,7 @@ Chip floor planning considerations
 4. A die is a small semiconductor material specimen which encapsulates the core.
 5. We place the logic cells inside the core
 6. Utilization factor = Area of netlist / Area of core
-7. Aspect Ratio =    Height
-                    ________
-                      Width
+7. Aspect Ratio =    Height/ Width
 8. Aspect ratio is 1, implies that the core is square shaped.
 9. A utilization factor of 0.5 to 0.6 isf typical and allows for the necessary design elements and potential future modifications
     
@@ -303,8 +301,14 @@ Chip floor planning considerations
 
 * There also IPs available which are used as preplaced cells:
         --> Memory
+
+  
         --> Clock-gating cell
+
+  
         --> Comparator
+
+  
         --> MUX
 
   
