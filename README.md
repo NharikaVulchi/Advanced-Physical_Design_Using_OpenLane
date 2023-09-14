@@ -291,15 +291,17 @@ Chip floor planning considerations
 
 
 **Pre-placed cells**
-* Pre-placed cells are an integral part of the physical design process. They are placed manually or through automated placement tools in the chip layout, along with the interconnect routing to create a physical design that meets performance, power, and area constraints.hese cells typically include standard components such as logic gates, flip-flops, multiplexers, and other building blocks used in digital circuit design.
+* Pre-placed cells are an integral part of the physical design process. They are placed manually in the chip layout, along with the interconnect routing to create a physical design that meets performance, power, and area constraints.hese cells typically include standard components such as logic gates, flip-flops, multiplexers, and other building blocks used in digital circuit design.
 
 * Combinational logic that are implemented in common are generalised such that it is placed on the chip, with specific number of input and output pins.
 
-![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/1bda2c8e-ccd3-4c87-a77d-2e46f29105a9)
 
 * This helps in multiple implementation of the same circuit when it is used greater number of times.
 
+* Functionality of preplaced cells is implemented only once.
+* The arrangement of these IP's in a chip is referred as floorplanning
 * There also IPs available which are used as preplaced cells:
+
  --> Memory
 
 --> Clock-gating cell
@@ -307,8 +309,10 @@ Chip floor planning considerations
 --> Comparator
 
 --> MUX
+* These Ip's have user defined locations and hence are placed in chip, before automated placement and routing and are called as pre-placed cells.
+ 
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/1bda2c8e-ccd3-4c87-a77d-2e46f29105a9) 
 
-  
 
 </details>
 
