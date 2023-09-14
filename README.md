@@ -317,12 +317,15 @@ Chip floor planning considerations
 
 * swithcing of inputs at the logic cells from 0 to 1 needs to charge the capacitors at the gate, this helps in maintaining the logic level at 1.
 * similarly the change in input from 1 to 0 , discharges the capacitor to ground.
-* Their primary role is to decouple the circuit from the power supply, ensuring that the circuit receives the necessary amount of current during transient events, such as switching activities.
+
 * The input voltage of the ciruit should be inside the noise margin of the circuit, to expect a correct output.
 * Decoupling capacitor supplies current to the circuit, when needed.
-* 
+* Their primary role is to decouple the circuit from the power supply, ensuring that the circuit receives the necessary amount of current during transient events, such as switching activities.
+* Decoupling capacitors are placed in close proximity to the Ip blocks.
 
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/cd330c4b-2587-45d8-90bc-be0f0afbbdb3)
 
+**Power planning**
 
 
 
