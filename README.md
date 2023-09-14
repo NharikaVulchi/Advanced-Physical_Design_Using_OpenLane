@@ -337,7 +337,11 @@ Chip floor planning considerations
 
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/fb5e1b66-8466-4cc5-962b-8151c6d19be2)
 
+**Pin placement**
 
+* Pin placement refers to the process of determining the locations and connections of input and output pins on an integrated circuit (IC) or semiconductor chip. 
+* This critical step ensures proper functionality and performance of the chip while considering factors like signal integrity, power distribution, and manufacturing constraints. 
+* Pin placement involves optimizing the arrangement of pins to minimize signal delays, reduce power consumption, and simplify the chip's layout for efficient manufacturing and testing.
 
 
 **Floorplanning and placement**
@@ -374,6 +378,8 @@ To view placement:
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/9af0766e-44a2-43c0-b007-4d45df0f6a50)
 
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/c7874c51-9b69-4e56-89ba-dc266b66e6bc)
+
+
 
 </details>
 
