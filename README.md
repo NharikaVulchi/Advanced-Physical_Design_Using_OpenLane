@@ -300,16 +300,13 @@ Chip floor planning considerations
 * This helps in multiple implementation of the same circuit when it is used greater number of times.
 
 * There also IPs available which are used as preplaced cells:
-        --> Memory
+ --> Memory
 
-  
-        --> Clock-gating cell
+--> Clock-gating cell
 
-  
-        --> Comparator
+--> Comparator
 
-  
-        --> MUX
+--> MUX
 
   
 
