@@ -250,11 +250,14 @@ Viewing the netlist file generated for **picorv32**
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/bd5801d5-d333-4ef4-b3f8-10222f9049f9)
 
 
-**Review files after design prep and run synthesis**
 
-**OpenLane project Git link description**
+We can view the synthesis reports in the following directory:
 
-**Steps to characterize synthesis results**
+```
+/home/niarika/OpenLane/designs/picorv32a/runs/RUN_2023.09.14_06.35.44/logs/synthesis/1-synthesis.log
+```
+
+![Screenshot from 2023-09-14 12-27-03](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/3d439a88-81ac-4f25-8ba1-5febf75eb556)
 
 
 </details>
@@ -266,6 +269,46 @@ Viewing the netlist file generated for **picorv32**
 <summary>
 Chip floor planning considerations
 </summary>
+  
+**Utlization factor and aspect ratio**
+1. Width and height of core and die are dependent on the dimension on the logic gates that has to be designed on the chip.
+2. We will calculate the area of a netlist and accordingly decide the area of core and die.
+3. A core is the section of the die where the fundamental logic design sits
+4. A die is a small semiconductor material specimen which encapsulates the core.
+5. We place the logic cells inside the core
+6. Utilization factor = Area of netlist / Area of core
+7. Aspect Ratio =    Height
+                    ________
+                      Width
+8. Aspect ratio is 1, implies that the core is square shaped.
+9. A utilization factor of 0.5 to 0.6 isf typical and allows for the necessary design elements and potential future modifications
+    
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/1fe173ce-eb8c-40f5-80c9-0bbd876685a8)
+
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/01bd0d0c-0ed0-4fe0-ba37-0c8adb66bdad)
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/cf397803-176d-4e02-a25c-0c71a4227c89)
+
+
+**Pre-placed cells**
+* Pre-placed cells are an integral part of the physical design process. They are placed manually or through automated placement tools in the chip layout, along with the interconnect routing to create a physical design that meets performance, power, and area constraints.hese cells typically include standard components such as logic gates, flip-flops, multiplexers, and other building blocks used in digital circuit design.
+
+* Combinational logic that are implemented in common are generalised such that it is placed on the chip, with specific number of input and output pins.
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/1bda2c8e-ccd3-4c87-a77d-2e46f29105a9)
+
+* This helps in multiple implementation of the same circuit when it is used greater number of times.
+
+* There also IPs available which are used as preplaced cells:
+        --> Memory
+        --> Clock-gating cell
+        --> Comparator
+        --> MUX
+
+  
+
 </details>
 
 <details>
