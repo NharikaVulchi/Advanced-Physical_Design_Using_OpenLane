@@ -331,8 +331,12 @@ Chip floor planning considerations
 * Instead, a well-designed power planning strategy includes creating a power mesh to efficiently distribute power and ground (VDD and VSS) across the entire chip.
 * Multiple GND and VDD points are strategically placed throughout the IC layout to ensure even power distribution.
 * This even distribution reduces the likelihood of voltage drops and improves the efficiency of power delivery across the chip.
+* We will have multiple Vdd and vss lines as shown in the below figure.
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/750fa871-9b02-449f-9e65-0b52ab8dfedc)
 
 
+![Screenshot from 2023-09-11 16-09-52](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/f536d1f0-fe81-467e-b580-6eacda6ecc91)
 
 </details>
 
