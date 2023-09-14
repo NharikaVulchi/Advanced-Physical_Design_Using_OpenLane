@@ -342,6 +342,8 @@ Chip floor planning considerations
 * Pin placement refers to the process of determining the locations and connections of input and output pins on an integrated circuit (IC) or semiconductor chip. 
 * This critical step ensures proper functionality and performance of the chip while considering factors like signal integrity, power distribution, and manufacturing constraints. 
 * Pin placement involves optimizing the arrangement of pins to minimize signal delays, reduce power consumption, and simplify the chip's layout for efficient manufacturing and testing.
+* Pin placement depends on the inputs and functionality of the netlist
+* clk port is the widest port, to make sure that it sees the least resistance
 
 
 **Floorplanning and placement**
@@ -392,6 +394,16 @@ To view placement:
 <summary>
 Library Binding and Placement
 </summary>
+
+**Netlist binding and placement**
+
+* All the logic cells in the netlist are visualised as physical cells with a defined width and height for design
+* A library has all the physical cells with each logic functionality with timing and area information.
+* Library also has different physical variants of logic cells
+* 
+
+
+
 </details>
 
 <details>
