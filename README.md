@@ -365,12 +365,17 @@ magic -T /home/niharika/.volare/sky130A/libs.tech/magic/sky130A.tech lef read ..
 **Placement**
 
 use :
+
+```
   run_placement
+```
 
 To view placement:
+
+```
   cd ~/OpenLane/designs/picorv32a/runs/RUN_2023.09.14_10.50.04/results/placement
   magic -T /home/niharika/.volare/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.nom.lef def read picorv32.def &
-
+```
   
 
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/c65af9b4-3032-4538-93b9-d1b3e8bf2bc0)
