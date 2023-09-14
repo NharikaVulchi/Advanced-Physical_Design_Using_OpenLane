@@ -338,7 +338,26 @@ Chip floor planning considerations
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/fb5e1b66-8466-4cc5-962b-8151c6d19be2)
 
 
+
+
+**Floorplanning and placement**
+
+Run the following command 
+
+```
+run_floorplan
+```
+
+To view the floorplan in magic use
+
+```
+cd ~/OpenLane/designs/picorv32a/runs/RUN_2023.09.11_10.01.18/results/floorplan
+magic -T /home/niharika/.volare/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.nom.lef def read picorv32.def &
+
+```
 ![Screenshot from 2023-09-11 16-09-52](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/f536d1f0-fe81-467e-b580-6eacda6ecc91)
+
+
 
 </details>
 
