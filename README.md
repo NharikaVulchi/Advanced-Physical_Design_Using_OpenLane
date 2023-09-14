@@ -327,6 +327,11 @@ Chip floor planning considerations
 
 **Power planning**
 
+* While pre-placed macros or cells can have dedicated decoupling capacitors for local power stability, it's not practical to provide each block or standard cell with its own decap.
+* Instead, a well-designed power planning strategy includes creating a power mesh to efficiently distribute power and ground (VDD and VSS) across the entire chip.
+* Multiple GND and VDD points are strategically placed throughout the IC layout to ensure even power distribution.
+* This even distribution reduces the likelihood of voltage drops and improves the efficiency of power delivery across the chip.
+
 
 
 </details>
