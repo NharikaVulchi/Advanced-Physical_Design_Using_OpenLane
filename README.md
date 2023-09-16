@@ -462,6 +462,23 @@ We feed the above 8 steps as input the characterisation software GUNA, which giv
 <summary>
 General timing characterization parameters
 </summary>
+  
+**Timing threshold** definitions are as follows:
+
+* slew_low_rise_thr  --> 20% value
+* slew_high_rise_thr --> 80% value
+* slew_low_fall_thr  --> 20% value
+* slew_high_fall_thr --> 80% value
+* in_rise_thr        --> 50% value
+* in_fall_thr        --> 50% value
+* out_rise_thr       --> 50% value
+* out_fall_thr       --> 50% value
+
+(thr = threshold , in =input, out = output)
+
+**Propogation delay and transition time**
+
+
 
 </details>
 
