@@ -557,6 +557,9 @@ magic -T ./libs/sky130A.tech sky130_inv.mag &
 Inception of layout A CMOS fabrication process
 </summary>
 
+**16-mask CMOS process**
+
+1. Selecting a substrate : The required substrate is chosen, for nMOS we choose, a p-type silicon substrate.
 
 </details>
 
