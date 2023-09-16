@@ -400,7 +400,11 @@ Library Binding and Placement
 * All the logic cells in the netlist are visualised as physical cells with a defined width and height for design
 * A library has all the physical cells with each logic functionality with timing and area information.
 * Library also has different physical variants of logic cells
+* The logic cells of the generated netlist should not be placed over the pre-placed cells.
+* Logic cells are placed such that they are close to their respective inputs on the die.
+* Optimized placement is done by placing, input flop close to the input port and output close to the output port.
 * 
+  
 
 
 
