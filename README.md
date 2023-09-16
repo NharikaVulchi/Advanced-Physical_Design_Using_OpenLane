@@ -502,6 +502,8 @@ Slew of the waveform specifies the delay of the wire capacitance. The propogatio
 <summary>
 Labs for CMOS inverter ngspice simulations
 </summary>
+
+
 </details>
 
 <details>
