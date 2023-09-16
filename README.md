@@ -518,6 +518,21 @@ We use the below code in the flow.tcl file of /Openlane/configrations/ directory
 set ::env(FP_IO_MODE) 2
 ```
 
+**Spice deck creation for CMOS inverter** : 
+
+* Component connectivity - Connectivity of the Vdd, Vss,Vin, substrate. Substrate tunes the threshold voltage of the MOS.
+* Component Values - values of w/L PMOS and NMOS, Output load capacitor, Input Gate Voltage, supply voltage (ideally PMOS should be twice the width of NMOS)
+* Identify the nodes - nodes are required to define spice netlist
+* Give the simulation commands and Netlist description 
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/6586c000-bbc0-4c0c-8299-9be745a634c2)
+
+
+Spice simulation of same w/L ratio for nmos and pmos
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/a8c0dfd1-972e-4d6d-8875-0e72a06d7919)
+
+
 
 </details>
 
@@ -525,6 +540,8 @@ set ::env(FP_IO_MODE) 2
 <summary>
 Inception of layout A CMOS fabrication process
 </summary>
+
+
 </details>
 
 <details>
