@@ -364,7 +364,43 @@ magic -T /home/niharika/.volare/sky130A/libs.tech/magic/sky130A.tech lef read ..
 ![Screenshot from 2023-09-11 16-09-52](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/f536d1f0-fe81-467e-b580-6eacda6ecc91)
 
 
+
+
+
+</details>
+
+<details>
+<summary>
+Library Binding and Placement
+</summary>
+
+**Netlist binding and Initial Placement**
+
+* All the logic cells in the netlist are visualised as physical cells with a defined width and height for design
+* A library has all the physical cells with each logic functionality with timing and area information.
+* Library also has different physical variants of logic cells
+* The logic cells of the generated netlist should not be placed over the pre-placed cells.
+
+**Optimized placement**
+
+* Logic cells are placed such that they are close to their respective inputs on the die.
+* Optimized placement is done by placing, input flop close to the input port and output close to the output port.
+* We estimate the wire length and capacitance and based on that we insert repeaters, if there is a long path from the input port to the flipflop
+* Slew is dependent on the capacitance value, higher is the capacitance more is the slew.
+* If the distance between the input port and flip-flop is not sufficient to maintain the signal integrity, we add buffers/repeaters in the path to reproduce input signal through the path without any loss of signal.
+* The cells which work at very high frequency are made sure to be placed together, so that there is no delay produced from the wires between the logic cells
+
+
+Optimised placed and routed cell
+
+  ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/390f0153-b6ac-4ac3-a20a-d6ead2bccc18)
+
+  
 **Placement**
+
+Placement in openlane occurs in two stages: 
+1. Global Placement: It finds optimal position for all cells which may not be legal and cells may overlap. Optimization is done through reduction of half parameter wire length[HPWL]. Overlap parameter should also reduce while we run placement.
+2. Detailed Placement: It alters the position of cells placed in the global placement step to legalise them
 
 use :
 
@@ -386,34 +422,25 @@ To view placement:
 
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/c7874c51-9b69-4e56-89ba-dc266b66e6bc)
 
-
-
-</details>
-
-<details>
-<summary>
-Library Binding and Placement
-</summary>
-
-**Netlist binding and placement**
-
-* All the logic cells in the netlist are visualised as physical cells with a defined width and height for design
-* A library has all the physical cells with each logic functionality with timing and area information.
-* Library also has different physical variants of logic cells
-* The logic cells of the generated netlist should not be placed over the pre-placed cells.
-* Logic cells are placed such that they are close to their respective inputs on the die.
-* Optimized placement is done by placing, input flop close to the input port and output close to the output port.
-* 
-  
-
-
+**Power ground generation is done post CTS in OpenLane**
 
 </details>
+
 
 <details>
 <summary>
 Cell design and characterization flows
 </summary>
+All the standard cells used in the design are placed in a library. We get a variant of standard cells in terms of functionality, area and power.
+
+Each cell goes through **cell design flow** before being used in our design.
+
+Cell design flow:
+1. inputs : PDKs, DRC and LVS rules, Spice models , library and user defined specs.
+2. design Step :Circuit design (decide the widths of tranistors) , Layout design (pmos and nmos network graph,Art of layout : Euler's path and stick diagram), Extraction of parasitics, Characterization (timing, noise, power).
+3. Outputs: CDL (circuit description language), LEF, GDSII, extracted SPICE netlist (.cir), timing, noise and power .lib files
+
+
 </details>
 
 <details>
