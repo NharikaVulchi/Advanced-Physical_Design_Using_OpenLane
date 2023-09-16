@@ -528,10 +528,16 @@ set ::env(FP_IO_MODE) 2
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/6586c000-bbc0-4c0c-8299-9be745a634c2)
 
 
-Spice simulation of same w/L ratio for nmos and pmos
+Spice simulation of different w/L ratio for nmos and pmos
 
-![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/a8c0dfd1-972e-4d6d-8875-0e72a06d7919)
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/341de6a3-fdd4-4503-9015-5de95dc3371d)
 
+Inference:
+* Shape of the waveform is same : CMOS circuit is a very robust device and is widely used in circuit designing
+* **Switching threshold** : A point where Vin=Vout , used in static behaviour evaluation. Both the PMOS and NMOS are ON, and there is direct current flowing from power to ground
+
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/26b872c7-28bd-4e20-91dc-ca4cdda63e7a)
 
 
 </details>
