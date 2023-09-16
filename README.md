@@ -478,7 +478,65 @@ General timing characterization parameters
 
 **Propogation delay and transition time**
 
+Propogation delay : 
+
+The time difference between when the input reaches 50% of its final value and when the output reaches 50% of its final value. Poor choice of threshold value will lead to negative delay values. If the output comes before the input, we get a negative delay, so we should choose a correct threshold value.
+
+
+```
+Propagation delay = time(out_*_thr) - time(in_*_thr)
+```
+
+Slew of the waveform specifies the delay of the wire capacitance. The propogation delay is also dependent on the slew. So to get a correct delay, we have to design the circuit to bring out the right slew
+
+**Transition time**: The time that takes the signal to move between states is the transition time , where the time is measured between 10% and 90% or 20% to 80% of the signal levels.
 
 
 </details>
+
+
+
+## DAY 3 Library Cell using Magic Layout and ngspice characterization
+
+<details>
+<summary>
+Labs for CMOS inverter ngspice simulations
+</summary>
+</details>
+
+<details>
+<summary>
+Inception of layout A CMOS fabrication process
+</summary>
+</details>
+
+<details>
+<summary>
+Sky130 Tech File Labs
+</summary>
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
