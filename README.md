@@ -512,6 +512,13 @@ In the below image, we can see that the pins are equidistant , now we change the
 
   ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/f58938f9-e4e4-4a6c-868b-aa3da9bd72f1)
 
+We use the below code in the flow.tcl file of /Openlane/configrations/ directory
+
+```
+set ::env(FP_IO_MODE) 2
+```
+
+
 </details>
 
 <details>
