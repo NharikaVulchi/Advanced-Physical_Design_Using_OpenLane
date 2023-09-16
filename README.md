@@ -630,12 +630,34 @@ Sky130 Tech File Labs
   
 **Spice Extraction** : Use the below commands in tkcon to achieve .mag to .spice extraction:
 
-    1. Make an extract file .ext by typing extract all in the tkon terminal.
-    2. Extract the .spice file from this ext file by typing _ext2spice cthresh 0 rthresh 0_then ext2spice in the tcon terminal.
+1. Make an extract file .ext by typing extract all in the tkon terminal.
+2. Extract the .spice file from this ext file by typing _ext2spice cthresh 0 rthresh 0_then ext2spice in the tcon terminal.
 
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/5839ab03-fd1f-404c-8832-897c3a2d9f4a)
 
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/ba643a32-e37f-40e9-833e-6d52b874dbaf)
+
+* For transient anaylsis, we would like to define these following connections and extra nodes for these in spice file
+  1. VGND to VSS
+  2. Supply voltage from VPWR to Ground - extra nodes here will be 0 and VDD with a value of 3.3V
+  3. Sweep in pulse between A pin and VGND (0) Before, editing the file, make sure scaling is proper, we measure the value of the gride size from the magic layout and define using  .option scale=0.01u in the Deck file.
+
+We comment the subckt since we are trying to input the controls and transient analysis also. Model names are changed to nshort_model.0 and pshort_model.0 according to the libs of nmos and pmos.
+
+We run the ngspice simulation using the below code in the **~/vsdstdcelldesign** directory
+
+```
+ngspice sky130_inv.spice
+tran 1n 20n
+plot v(y) v(a)
+```
+
+The netlist and ouput:
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/cc045304-2dc8-45bf-b144-76b85c525fc5)
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/0a85123e-537d-47ba-8de1-ed24732ca961)
+
 
 </details>
 
