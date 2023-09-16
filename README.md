@@ -559,7 +559,63 @@ Inception of layout A CMOS fabrication process
 
 **16-mask CMOS process**
 
-1. Selecting a substrate : The required substrate is chosen, for nMOS we choose, a p-type silicon substrate.
+1. Selecting a substrate : The required substrate is chosen, for nMOS we choose, a p-type silicon substrate. Substrate doping should be less than **well** doping
+
+2. Creating active region :
+   * Small pockets of active regions are made on the p-substrate.
+   * Deposition of 40nm SiO2 and 80nm of Si3n4 is made on the p-substrate.
+   * Then a 1 um layer of photoresist is applied on the silicon layers.
+   * Masks are used to protect the required regions from UV light (photolithography). Extra photoresist is washed away.
+   * Areas exposed to the UV light chemically reacts and is edged off. 
+   * The substrate is then placed in a oxidation furnace and the SiO2 layers which are exposed gets oxidised(LOCOS - Local oxidation of silicon) and the areas which are protected with Si3N4 are unoxidised and isolated.
+   * Extra Si3N4 is stripped using hot phosphoric acid
+
+3. N-well and P-well formation :
+   * both the n-well and p-well formation can not be done together
+   * p-well is formed using Boron in ion-implantation process. Boron atoms penetrate through oxide layer and moves into the p-substrate to form p-well
+   * p-well is covered using a mask while we create a n-well
+   * Phosphorous atoms are used in ion-implantation process to make a n-well.
+   * pMOS is made in n-well tub and nMOS is made in p-well tub
+
+4. Formation of **gate**
+   * The gate is a pivotal CMOS transistor terminal that controls threshold voltages for transistor switching.
+   * A polysilicon layer is deposited and photolithography techniques are applied to create NMOS and PMOS gates.
+   * Important parameters for gate formation include oxide capacitance and doping concentration.
+
+  5. Lightly doped drain formation :
+     * drain is lightly doped due to two reasons - hot electron effect and short channel effect.
+     * we follow the same steps as forming active regions to form drains
+
+  6. Source and drain formation :
+     * Thin oxide layers are added to avoid channel effects during ion implantation.
+     * N+ and P+ implants are formed using arsenic implantation(75 kev energy) and high temperature annealing.
+     * Annealing penetrates the active regions deeper into the substrate.
+
+ 7. Steps to form contacts and interconnects
+    * Thin screen oxide is removed through etching in HF solution.
+    *  Titanium deposition through sputtering is initiated.
+    *  Heat treatment results in chemical reactions, producing low-resistant titanium silicon dioxide for interconnect contacts and titanium nitride for top-level connections, enabling local communication.
+
+ 8. Higher Level Metal Formation:
+    * To achieve suitable metal interconnects, non-planar surface topography is addressed.
+    * Chemical Mechanical Polishing (CMP) is utilized by doping silicon oxide with Boron or Phosphorus to achieve surface planarization.
+    * TiN and blanket Tungsten layers are deposited and subjected to CMP.
+    * An aluminum (Al) layer is added and subjected to photolithography and CMP.
+    * This constitutes the first level of interconnects, and additional interconnect layers are added to reach higher-level metal layers.
+
+ 9. Dielectric Layer Addition:
+     * a  stronger dielectric layer, Si3N4, is applied to safeguard the chip.
+
+The final output after 16-Mask CMOS process
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/06a2a82c-4ca5-4f52-b957-8d50469d887d)
+
+
+
+
+  
+
+
 
 </details>
 
