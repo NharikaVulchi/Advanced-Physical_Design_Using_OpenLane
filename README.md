@@ -502,7 +502,15 @@ Slew of the waveform specifies the delay of the wire capacitance. The propogatio
 <summary>
 Labs for CMOS inverter ngspice simulations
 </summary>
+  
+**IO Placer revision**
 
+* We can make changes to the environment variables in the flow to observe the changes in our design.
+* We change the I/O pins distance which are equidistant in the last run
+
+In the below image, we can see that the pins are equidistant , now we change the environment variables
+
+  ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/f58938f9-e4e4-4a6c-868b-aa3da9bd72f1)
 
 </details>
 
