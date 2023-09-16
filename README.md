@@ -632,6 +632,7 @@ Sky130 Tech File Labs
 
 1. Make an extract file .ext by typing extract all in the tkon terminal.
 2. Extract the .spice file from this ext file by typing _ext2spice cthresh 0 rthresh 0_then ext2spice in the tcon terminal.
+3. .spice file is created as shown below
 
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/5839ab03-fd1f-404c-8832-897c3a2d9f4a)
 
@@ -658,7 +659,8 @@ The netlist and ouput:
 
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/0a85123e-537d-47ba-8de1-ed24732ca961)
 
-
+Rise time = 20% - 80% of final value = 0.064 ns
+Fall time = 805 - 205 of final value = 0.042 ns
 </details>
 
 
