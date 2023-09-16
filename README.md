@@ -610,8 +610,12 @@ The final output after 16-Mask CMOS process
 
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/06a2a82c-4ca5-4f52-b957-8d50469d887d)
 
+**Basic layers layout and LEF using inverter**
 
-
+1. We see the layers which are required for CMOS inverter from the layout.
+2. Gates of both PMOS and NMOS are connected together and fed to input, NMOS source connected to ground(here, VGND), PMOS source is connected to VDD(here, VPWR)
+3. Drains of PMOS and NMOS are connected together and fed to output(here, Y).
+4. The First layer in skywater130 is localinterconnect layer(locali) , above that metal 1 is purple color and metal 2 is pink color. 
 
   
 
@@ -623,6 +627,16 @@ The final output after 16-Mask CMOS process
 <summary>
 Sky130 Tech File Labs
 </summary>
+  
+**Spice Extraction** : Use the below commands in tkcon to achieve .mag to .spice extraction:
+
+    1. Make an extract file .ext by typing extract all in the tkon terminal.
+    2. Extract the .spice file from this ext file by typing _ext2spice cthresh 0 rthresh 0_then ext2spice in the tcon terminal.
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/5839ab03-fd1f-404c-8832-897c3a2d9f4a)
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/ba643a32-e37f-40e9-833e-6d52b874dbaf)
+
 </details>
 
 
