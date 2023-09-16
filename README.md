@@ -540,6 +540,16 @@ Inference:
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/26b872c7-28bd-4e20-91dc-ca4cdda63e7a)
 
 
+Viewing the inveter layout:
+
+```
+git clone https://github.com/nickson-jose/vsdstdcelldesign.git
+magic -T ./libs/sky130A.tech sky130_inv.mag &
+```
+
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/afbb0334-1311-415d-a8e5-79e0264d4d94)
+
 </details>
 
 <details>
