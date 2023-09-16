@@ -437,15 +437,31 @@ Each cell goes through **cell design flow** before being used in our design.
 
 Cell design flow:
 1. inputs : PDKs, DRC and LVS rules, Spice models , library and user defined specs.
-2. design Step :Circuit design (decide the widths of tranistors) , Layout design (pmos and nmos network graph,Art of layout : Euler's path and stick diagram), Extraction of parasitics, Characterization (timing, noise, power).
-3. Outputs: CDL (circuit description language), LEF, GDSII, extracted SPICE netlist (.cir), timing, noise and power .lib files
+2. design Step :Circuit design (decide the widths of tranistors) , Layout design (pmos and nmos network graph,Art of layout : Euler's path and stick diagram), Extraction of parasitics, Characterization (timing, noise, power).Stick diagram to layout according to inputs. After the layout, we get a defined library cell with specific height and width.
+3. Outputs: CDL (circuit description language), LEF(defines size of the cell), GDSII, extracted SPICE netlist (.cir), timing, noise and power .lib files
 
+**Standard Characterization flow**
+
+1. Read in the model files 
+2. Read the extracted spice netlist
+3. recognize behaviour of the model
+4. Read the sub-circuits of inverter
+5. Attach necessary power source (Vdd, GND)
+6. Apply the stimulus
+7. Provide necessary output capacitance
+8. Provide simulation command
+
+We feed the above 8 steps as input the characterisation software GUNA, which gives the timing,noise and power models.
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/505e3dc5-e93c-4800-9da7-ae6fd3ff5907)
 
 </details>
+
 
 <details>
 <summary>
 General timing characterization parameters
 </summary>
+
 </details>
 
