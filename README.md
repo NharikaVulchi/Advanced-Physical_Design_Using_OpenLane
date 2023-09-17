@@ -1,4 +1,3 @@
-![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/8a6d6f4d-dd8c-4164-a2ec-b4ac1c9873e7)
 ## DAY 1 Introduction to open-source EDA , OpenLane and Sky130 PDK
 
 
