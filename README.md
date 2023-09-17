@@ -661,11 +661,252 @@ The netlist and ouput:
 
 Rise time = 20% - 80% of final value = 0.064 ns
 Fall time = 805 - 205 of final value = 0.042 ns
+
+**Magic tool options and DRC rules**
+
+The technology file is a setup file that declares layer types, colors, patterns, electrical connectivity, DRC, device extraction rules and rules to read LEF and DEF files. Magic layouts can be sourced from **opencircuitdesign.com** using the following commands :
+
+```
+wget http://opencircuitdesign.com/open_pdks/archive/drc_tests.tgz
+tar xfz drc_tests.tgz
+```
+drc_tests file is created . Invoke magic and run the following command :
+
+```
+magic -d XR met1.mag
+```
+
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/366307bd-06ae-42a4-8575-9348cda53c8a)
+
+
+</details>
+
+## DAY 4 Pre-layout timing analysis and importance of good clock tree
+
+<details>
+<summary>
+Timing modeling using delay tables
+</summary>
+
+PnR tool does not need all informations from the .mag file like the logic part but only PnR boundaries, power/ground ports, and input/output ports. This is what a LEF file actually contains. So the next step is to extract the LEF file from Magic. But first, we need to follow guidelines of the PnR tool for the standard cells:
+
+1. The input and output ports lie on the intersection of the horizontal and vertical tracks (ensure the routes can reach that ports).
+2. The width of the standard cell must be odd multiple of the tracks horizontal pitch and height must be odd multiples of tracks vertical pitch.
+
+use the commands inside the tkon windonw:
+
+```
+grid on
+grid 0.46um 0.34um 0.23um 0.17um
+```
+* The grids show where the routing for the local-interconnet layer can only happen, the distance of the grid lines are the required pitch of the wire
+* The LEF file contains the cell size, port definitions, and properties which aid the placer and router too
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/17c81990-a05f-484d-9401-2165016a83dc)
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/9c438085-c2a5-4ee0-9244-bd8b346a9f3a)
+
+**Port definition**
+
+* In Magic Layout window, first source the .mag file for the inverter. Then go to Edit --> Text 
+* When we double press S at the I/O lables, the text automatically takes the string name and size. Ensure the Port enable checkbox is checked and default checkbox is unchecked as shown in the figure
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/e817db5c-c609-406f-a659-99db688f124b)
+
+
+**Port class and port attributes**
+
+```
+port A class input
+port A use signal    // select port A
+
+port Y class output
+port Y use signal    //select y
+
+port VPWR class inout
+port VPWR use power    //select VPWR
+
+port VGND class inout
+port VGND use ground    //select VGND
+```
+Creating a lef file : **lef write**
+
+
+Steps to include custom cell in ASIC:
+
+We have created a custom standard cell in previous steps of an inverter. Copy lef file, sky130_fd_sc_hd_typical.lib, sky130_fd_sc_hd_slow.lib & sky130_fd_sc_hd_fast.lib to src folder of picorv32a from libs folder vsdstdcelldesign. Then modify the config.tcl as follows
+
+```
+{
+"DESIGN_NAME": "picorv32",
+"VERILOG_FILES": "dir::src/picorv32a.v",
+"CLOCK_PORT": "clk",
+"CLOCK_NET": "clk",
+"GLB_RESIZER_TIMING_OPTIMIZATIONS": true,
+"RUN_HEURISTIC_DIODE_INSERTION": true,
+"DIODE_ON_PORTS": "in",
+"GPL_CELL_PADDING": 2,
+"DPL_CELL_PADDING": 2,
+"CLOCK_PERIOD": 24,
+"FP_CORE_UTIL": 35,
+"PL_RANDOM_GLB_PLACEMENT": 1,
+"PL_TARGET_DENSITY": 0.5,
+"FP_SIZING": "relative",
+"LIB_SYNTH":"dir::src/sky130_fd_sc_hd__typical.lib",
+"LIB_FASTEST":"dir::src/sky130_fd_sc_hd__fast.lib",
+"LIB_SLOWEST":"dir::src/sky130_fd_sc_hd__slow.lib",
+"LIB_TYPICAL":"dir::src/sky130_fd_sc_hd__typical.lib",
+"TEST_EXTERNAL_GLOB":"dir::/src/*",
+"SYNTH_DRIVING_CELL":"sky130_vsdinv",
+"MAX_FANOUT_CONSTRAINT": 4,
+"pdk::sky130*": {
+    "MAX_FANOUT_CONSTRAINT": 6,
+    "scl::sky130_fd_sc_ms": {
+        "FP_CORE_UTIL": 30
+    }
+    }
+}
+```
+Run OpenLane using the following commands:
+
+```
+prep -design picorv32a
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+run_synthesis
+```
+We can see changes in the synthesis file :
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/da9e875d-eada-4f9d-beba-4659f08db211)
+
+**Delay Tables**
+
+We encounter several types of delays in ASIC design. They are as follows:
+* Gate delay or Intrinsic delay
+* Net delay or Interconnect delay or Wire delay or Extrinsic delay or Flight time
+* Transition or Slew,Propagation delay,Contamination delay.
+* Wire delays or extrinsic delays are calculated using output drive strength, input capacitance and wire load models. Other delays are intrinsic properties of each and every gate.
+* Delays are interdependent on different electrical properties.Input capacitance of the logic gate is a function of output state, output loads and input slew rate, Internal timing arcs and output slew rate is a function of switching inputs, Capacitance of the wire is dependent on frequency. 
+
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/7b99ea58-f6d4-40d5-9979-4a8a0e8e4c7c)
+
+</details>
+
+<details>
+<summary>
+Timing analysis with ideal clocks using OpenSTA
+</summary>
+
+1. **Setup time** is the required time duration that the input data is stable before the triggering-edge of the clock. 
+2. If data is changing within this setup time window, the input data might be lost and not stored in the flip-flop as metastability might occur.
+3. Metastability: When setup and hold time requirements are violated, the flip-flop state becomes unstable, and after an unpredictable duration, the state of the flip-flop can settle either way (1 or 0). This scenario is known as metastability.
+4. As shown in the following figure, output Q1 passes through the slow logic and arrives late at the input D2 of FF2, which leads to setup time violation and the loss of the new data. Thus combinational delay must be less than **clock frequency - setup time**
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/0647e75e-2abb-4cf2-b567-da9c3ed99e3a)
+
+1. **Clock jitter** is a characteristic of the clock source and the clock signal environment.
+2. It can be defined as “deviation of a clock edge from its ideal location.” Clock jitter is typically caused by clock generator circuitry, noise, power supply variations, interference from nearby circuitry etc. Jitter is a contributing factor to the design margin specified for timing closure.The below figure explains clock jitter
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/eac415ef-c85a-4ffc-95c9-3f65db8bebc2)
+
+**Configuring OpenSTA tool**
+
+Timing analysis is carried out outside the openLANE flow using OpenSTA tool. For this, pre_sta.conf is required to carry out the STA analysis. Invoke OpenSTA outside the openLANE:
+
+```
+sta pre_sta.conf
+```
+
+
+</details>
+
+<details>
+<summary>
+Clock tree synthesis TritonCTS and signal integrity
+</summary>
+
+1. The purpose of building a clock tree is to enable the clock input to reach every element and to ensure a zero clock skew.
+2.  H-tree is a common methodology followed in CTS. Before attempting a CTS run in TritonCTS tool, if the slack was attempted to be reduced in previous run, the netlist may have gotten modified by cell replacement techniques. T
+3.  Therefore, the verilog file needs to be modified using the write_verilog command. In this stage clock is propagated and make sure that clock reaches each and every clock pin from clock source with mininimum skew and insertion delay. Inorder to do this, we implement H-tree using mid point strategy.
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/d9cbef07-d6ee-4bb2-9e80-c710d8ef5653)
+
+
+**Balanced Tree CTS**: In a balanced tree CTS, the clock signal is distributed in a balanced manner, often resembling a binary tree structure. This approach aims to provide roughly equal path lengths to all clock sinks (flip-flops) to minimize clock skew. It's relatively straightforward to implement and analyze but may not be the most power-efficient solution.
+
+**H-tree CTS**: An H-tree CTS uses a hierarchical tree structure, resembling the letter "H." It is particularly effective for distributing clock signals across large chip areas. The hierarchical structure can help reduce clock skew and optimize power consumption.
+
+**Star CTS**: In a star CTS, the clock signal is distributed from a single central point (like a star) to all the flip-flops. This approach simplifies clock distribution and minimizes clock skew but may require a higher number of buffers near the source.
+
+**Global-Local CTS**: Global-Local CTS is a hybrid approach that combines elements of both star and tree topologies. The global clock tree distributes the clock signal to major clock domains, while local trees within each domain further distribute the clock. This approach balances between global and local optimization, addressing both chip-wide and domain-specific clocking requirements.
+
+
+**CrossTalk** is a disturbance caused by the electric or magnetic fields of one telecommunication signal affecting a signal in an adjacent circuit. Essentially, every electrical signal has a varying electromagnetic field. Whenever these fields overlap, unwanted signals -- capacitive, conductive or inductive coupling -- cause electromagnetic interference (EMI) that can create crosstalk. Overlap can occur with structured cabling, integrated circuit design, audio electronics and other connectivity systems. For example, if there are two wires in close proximity that are carrying different signals, their currents will create magnetic fields that induce a weaker signal in the neighboring wire. 
+
+Impact: Crosstalk is a significant concern in VLSI design due to the high integration density of components on a chip. Uncontrolled crosstalk can lead to data corruption, timing violations, and increased power consumption. Mitigation: VLSI designers employ various techniques to mitigate crosstalk, such as optimizing layout and routing, using appropriate shielding, implementing proper clock distribution strategies, and utilizing clock gating to reduce dynamic power consumption when logic is idle
+
+
+**Clock Net Shielding**
+
+Shielding is done so as to prevent gltch. Shields are connected to VDD or GND. The shields do not switch.VLSI designers may use shielding techniques to isolate the clock network from other signals, reducing the risk of interference. This can include dedicated clock routing layers, clock tree synthesis algorithms, and buffer insertion to manage clock distribution more effectively. Clock Domain Isolation: VLSI designs often have multiple clock domains. Shielding and proper clock gating help ensure that clock signals do not propagate between domains, avoiding metastability issues and maintaining synchronization.
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/0379de4f-c8a1-46e9-bf49-12e5e8379953)
+
+**LAB**
+
+Before attempting to run CTS in TritonCTS tool, if the slack was attempted to be reduced in previous run, the netlist may have gotten modified by cell replacement techniques. Therefore, the verilog file needs to be modified using the write_verilog command. Then, the synthesis, floorplan and placement is run again. To run CTS use the command: **run_cts**
+
+We observe that both values are postive, hence there is no violation
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/7a2d9d2a-7ca4-4ce4-a66a-9d289eea66a8)
+
+clock is propagated, so, we do timing analysis with real clocks. From now post cts analysis is performed by operoad within the openlane flow In openroad, execute the following commands:
+
+```
+openroad
+read_lef <path of merge.nom.lef>
+read_def <path of def>
+write_db pico_cts.db
+read_db pico_cts.db
+read_verilog /home/parallels/OpenLane/designs/picorv32a/runs/RUN_09-09_11-20/results/synthesis/picorv32a.v
+read_liberty $::env(LIB_SYNTH_COMPLETE)
+read_sdc /home/parallels/OpenLane/designs/picorv32a/src/my_base.sdc
+set_propagated_clock (all_clocks)
+report_checks -path_delay min_max -format full_clock_expanded -digits 4
+```
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/34f51812-78ae-44b7-a294-80c433b71aca)
+
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/1adba820-2d06-41f4-b1bb-8672cb8930b6)
+
+
+Clock skew is chekced using the following command : **report clock_skew -setup**
+
 </details>
 
 
 
+## DAY 5 Final steps for RTL2GDS using tritonRoute and openSTA
 
+<details>
+<summary>
+Routing and Design Rule Check(DRC)
+</summary>
+</details>
+
+<details>
+<summary>
+Power Distribution Networking and Routing
+</summary>
+</details>
+
+<details>
+<summary>
+TritonRoute Features
+</summary>
+</details>
 
 
 
