@@ -1,4 +1,4 @@
-
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/8a6d6f4d-dd8c-4164-a2ec-b4ac1c9873e7)
 ## DAY 1 Introduction to open-source EDA , OpenLane and Sky130 PDK
 
 
@@ -894,18 +894,97 @@ Clock skew is chekced using the following command : **report clock_skew -setup**
 <summary>
 Routing and Design Rule Check(DRC)
 </summary>
+
+**Maze Routing**
+
+1. Routing is the process of creating physical connections based on logical connectivity. Signal pins are connected by routing metal interconnects.
+2.  Routed metal paths must meet timing, clock skew, max trans/cap requirements and also physical DRC requirements.
+3.  In grid based routing system each metal layer has its own tracks and preferred routing direction which are defined in a unified cell in the standard cell library.
+4.  there are four steps of routing :
+    * global routing
+    * track assignment
+    * detail routing
+    * search and repair
+5. The Maze Routing algorithm, such as the Lee algorithm, is one approach for solving routing problems. In this method, a grid similar to the one created during cell customization is utilized for routing purposes.
+6.  The Lee algorithm starts with two designated points, the source and target, and leverages the routing grid to identify the shortest or optimal route between them. The algorithm assigns labels to neighboring grid cells around the source, incrementing them from 1 until it reaches the target (for instance, from 1 to 7).
+7.  Various paths may emerge during this process, including L-shaped and zigzag-shaped routes. The Lee algorithm prioritizes selecting the best path, typically favoring L-shaped routes over zigzags.
+8.  If no L-shaped paths are available, it may resort to zigzag routes. This approach is particularly valuable for global routing tasks.
+
+**Design Rule check**
+
+A physical design technique called Design Rule Checking (DRC) is used to check whether a chip layout complies with a number of requirements set out by the semiconductor manufacturer. Each semiconductor manufacturing process will have its own set of guidelines and margins to ensure that normal manufacturing variability won't lead to chip failure. below mentioned are few examples of DRC : Minimum width and spacing for metal, Minimum width and spacing for via, Fat wire Via keep out Enclosure, End of Line spacing, Minimum area, Over Max stack level, Wide metal jog, Misaligned Via wire, Different net spacing, Special notch spacing, Shorts violation, Different net Via cut spacing, Less than min edge length
+
 </details>
 
 <details>
 <summary>
 Power Distribution Networking and Routing
 </summary>
+  
+**PDN generation** is not a component of the floorplan run in OpenLANE, in contrast to the typical ASIC flow. After the CTS and post-CTS STA analysis, PDN must be prepared.
+
+**gen_pdn** is the command used to generate power distribution network.
+
+1. The power distribution network must use design_cts.def as the input def file.
+2. This creates a grid and band for Vdd and floor. These are placed around the standard cell. A standard cell is designed so that its height is a multiple of the distance between its Vdd and ground bar.
+3. The slope here is 2.72. Power can be supplied to standard cells only if the above conditions are met. The chip is powered via a power connection. There is one for Vdd and one for Gnd Current flows from the pad to the ring through the through hole. The strap is connected to the ring.
+4. The Vdd band is connected to the Vdd ring and the Gnd band is connected to the Gnd ring. Has horizontal and vertical support Now we need to supply power from the tape to the standard cell.
+5. Straps are connected to standard cell rails If a macro is present, the strap is attached to the macro's ring via the macro pad and her PDN for the macro is pre-created. Straps and rails have definitions.
+6. In this design, the tabs are on metal layers 4 and 5, and the standard cell bars are on metal layer 1. Connect layers with vias as needed.
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/a4871453-e824-4151-9d02-00300b6650ae)
+
+
+**Routing** is the process of physically connecting signal pins using metal layers. Following CTS and optimisation, routing is the phase in which precise connections between standard cells, macros, and I/O pins are made. The logical connections provided in the netlist are used to determine the creation of electrical connections in the layout utilising metals and vias.
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/e2065337-98c0-4c79-b75c-f76ec06a295c)
+
+
+OpenLANE uses the TritonRoute tool for routing. There are 2 stages of routing:
+1. Global routing: Routing region is divided into rectangle grids which are represented as course 3D routes (Fastroute tool).
+2. Detailed routing: Finer grids and routing guides used to implement physical wiring (TritonRoute tool).
+
+
 </details>
 
 <details>
 <summary>
 TritonRoute Features
 </summary>
+  
+**Feature-1 Honors pre-processed route guides**
+
+1. Adherence to Pre-Processed Route Guides: TritonRoute places significant emphasis on following pre-processed route guides.
+2. This involves several actions: Initial Route Guide Analysis: TritonRoute analyzes the directions specified in the preferred route guides. If any non-directional routing guides are identified, it breaks them down into unit widths.
+3. Guide Splitting: In cases where non-directional routing guides are encountered, TritonRoute divides them into unit widths to facilitate routing.
+4. Guide Merging: TritonRoute merges guides that are orthogonal (touching guides) to the preferred guides, streamlining the routing process.
+5.  Guide Bridging: When it encounters guides that run parallel to the preferred routing guides, TritonRoute employs an additional layer to bridge them, ensuring efficient routing within the preprocessed guides.
+6.  Route guides are followed to satisfy inter- guide connectivity. Requirements of preprocessed route guides: Must have unit width and must be in the predefined direction. Directions of metal ensures minimum capacitances
+
+   ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/0f7dc47f-715d-4787-a0c2-dd2e9f53f05e)
+
+**feature-2 inter-guide connectivity , Intra and inter layer routing****
+Two guides are connected if They are on the same metal layer with touching edges or they are on neighbouring metal layers with a non zero vertically overlapped area.
+
+Each unconnected terminal should have its pin shape overlapped by a route guide
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/3aec79a2-bc3e-420a-875a-2db12b9fac7c)
+
+
+**Tritonroute run for routing**
+
+We start routing with : **run_routing** 
+
+This will do both global and detailed routing, this will take multiple optimization iterations until the DRC violation is reduced to zero. The zeroth iteration has 27426 violations and only at the 8th iteration was all violations solved. 
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/d8480acc-2661-472d-a295-52ee9aac1109)
+
+We can view layout in magic tool 
+
+ magic -T /home/niharika/vsdstdcelldesign/libs/sky130A.tech lef read tmp/merged.nom.lef def read results/routing/picorv32a.def & 
+
+ ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/f019e182-30d4-4046-9678-c249de688778)
+
 </details>
 
 
