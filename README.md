@@ -797,6 +797,11 @@ niharika@niharika-HP-Pavilion-Laptop-15-eh1xxx:~/vsdstdcelldesign$  magic -T /ho
 
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/e0a656b7-499c-40ec-87b1-b967d83c952a)
 
+Now we see the custom cell in our placement:
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/47f18711-0647-49fc-a915-015544437620)
+
+
 
 **Delay Tables**
 
