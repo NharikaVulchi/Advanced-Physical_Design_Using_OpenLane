@@ -898,6 +898,8 @@ set_propagated_clock (all_clocks)
 report_checks -path_delay min_max -format full_clock_expanded -digits 4
 ```
 
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/ed2a0c9e-15f5-43c3-a465-647493a88081)
+
 Clock skew is chekced using the following command : **report clock_skew -setup**
 
 </details>
@@ -940,6 +942,12 @@ Power Distribution Networking and Routing
 **PDN generation** is not a component of the floorplan run in OpenLANE, in contrast to the typical ASIC flow. After the CTS and post-CTS STA analysis, PDN must be prepared.
 
 **gen_pdn** is the command used to generate power distribution network.
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/248c2079-2c0e-43de-9eab-7dbd1283419c)
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/1bbf5787-98d8-44ff-bf53-a8eda67fd514)
+
+
 
 1. The power distribution network must use design_cts.def as the input def file.
 2. This creates a grid and band for Vdd and floor. These are placed around the standard cell. A standard cell is designed so that its height is a multiple of the distance between its Vdd and ground bar.
@@ -994,6 +1002,9 @@ We start routing with : **run_routing**
 This will do both global and detailed routing, this will take multiple optimization iterations until the DRC violation is reduced to zero. The zeroth iteration has 27426 violations and only at the 8th iteration was all violations solved. 
 
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/d8480acc-2661-472d-a295-52ee9aac1109)
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/1b9d4132-2b6e-41f4-ad0c-22983b78b33e)
+
 
 We can view layout in magic tool 
 
