@@ -708,8 +708,11 @@ grid 0.46um 0.34um 0.23um 0.17um
 
 **Port definition**
 
-* In Magic Layout window, first source the .mag file for the inverter. Then go to Edit --> Text 
-* When we double press S at the I/O lables, the text automatically takes the string name and size. Ensure the Port enable checkbox is checked and default checkbox is unchecked as shown in the figure
+* Port definition is required when we create the lef file
+* In Magic Layout window, first source the .mag file for the inverter. Select the port and then go to Edit --> Text 
+* When we double press S at the I/O lables, the text automatically takes the string name and size. Ensure the Port enable checkbox is checked and default checkbox is unchecked as shown in the figure.
+* For ports we make the sticky label as **locali** and for the Vpwr and GND we make it as **metal1** because they are attached to metal layer.
+* Our inverter ports are already defined.
 
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/e817db5c-c609-406f-a659-99db688f124b)
 
@@ -729,53 +732,59 @@ port VPWR use power    //select VPWR
 port VGND class inout
 port VGND use ground    //select VGND
 ```
-Creating a lef file : **lef write**
+Creating a lef file : type this command **lef write** in the tckon window, we will see a lef file in the /home/niharika/vsdstdcelldesign directory
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/e1539e6a-9b05-4b04-9a3d-0980089ddfd4)
 
 
 Steps to include custom cell in ASIC:
 
-We have created a custom standard cell in previous steps of an inverter. Copy lef file, sky130_fd_sc_hd_typical.lib, sky130_fd_sc_hd_slow.lib & sky130_fd_sc_hd_fast.lib to src folder of picorv32a from libs folder vsdstdcelldesign. Then modify the config.tcl as follows
+* We have created a custom standard cell in previous steps of an inverter. 
+* Now we copy lef file, sky130_fd_sc_hd_typical.lib, sky130_fd_sc_hd_slow.lib & sky130_fd_sc_hd_fast.lib to src folder of picorv32a from libs folder vsdstdcelldesign. Then modify the config.tcl as follows
 
 ```
-{
-"DESIGN_NAME": "picorv32",
-"VERILOG_FILES": "dir::src/picorv32a.v",
-"CLOCK_PORT": "clk",
-"CLOCK_NET": "clk",
-"GLB_RESIZER_TIMING_OPTIMIZATIONS": true,
-"RUN_HEURISTIC_DIODE_INSERTION": true,
-"DIODE_ON_PORTS": "in",
-"GPL_CELL_PADDING": 2,
-"DPL_CELL_PADDING": 2,
-"CLOCK_PERIOD": 24,
-"FP_CORE_UTIL": 35,
-"PL_RANDOM_GLB_PLACEMENT": 1,
-"PL_TARGET_DENSITY": 0.5,
-"FP_SIZING": "relative",
-"LIB_SYNTH":"dir::src/sky130_fd_sc_hd__typical.lib",
-"LIB_FASTEST":"dir::src/sky130_fd_sc_hd__fast.lib",
-"LIB_SLOWEST":"dir::src/sky130_fd_sc_hd__slow.lib",
-"LIB_TYPICAL":"dir::src/sky130_fd_sc_hd__typical.lib",
-"TEST_EXTERNAL_GLOB":"dir::/src/*",
-"SYNTH_DRIVING_CELL":"sky130_vsdinv",
-"MAX_FANOUT_CONSTRAINT": 4,
-"pdk::sky130*": {
-    "MAX_FANOUT_CONSTRAINT": 6,
-    "scl::sky130_fd_sc_ms": {
-        "FP_CORE_UTIL": 30
-    }
-    }
+# Design
+set ::env(DESIGN_NAME) "picorv32a"
+
+set ::env(VERILOG_FILES) "./designs/picorv32a/src/picorv32a.v"
+set ::env(SDC_FILES) "./designs/picorv32a/src/picorv32a.sdc"
+
+
+set ::env(CLOCK_PERIOD) "5.000"
+set ::env(CLOCK_PORT) "clk"
+
+set ::env(CLOCK_MET) $::env(CLOCK_PORT) 
+
+
+set ::env(LIB_SYNTH) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib "
+set ::env(LIB_MIN) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__fast.lib"
+set ::env(LIB_MAX) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__slow.lib "
+set ::env(LIB_TYPICAL) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib"
+
+set ::env(EXTRA_LEFS) [glob $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/src/*.lef]   ## this is the new line added to the existing config.tcl file
+
+set filename $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/$::env(PDK)_$::env(STD_CELL_LIBRARY)_config.tcl
+if { [file exists $filename] == 1 } {
+  source $filename
 }
 ```
+
 Run OpenLane using the following commands:
 
 ```
 prep -design picorv32a
+
+//new additional commands for custom cell
+
 set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
 add_lefs -src $lefs
 run_synthesis
 ```
+
+
 We can see changes in the synthesis file :
+
+
 
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/da9e875d-eada-4f9d-beba-4659f08db211)
 
