@@ -1001,14 +1001,20 @@ We start routing with : **run_routing**
 
 This will do both global and detailed routing, this will take multiple optimization iterations until the DRC violation is reduced to zero. The zeroth iteration has 27426 violations and only at the 8th iteration was all violations solved. 
 
-![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/d8480acc-2661-472d-a295-52ee9aac1109)
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/7e3c3013-2f07-453a-8b2f-928bbe61ff4e)
+
 
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/1b9d4132-2b6e-41f4-ad0c-22983b78b33e)
 
 
 We can view layout in magic tool 
 
- magic -T /home/niharika/vsdstdcelldesign/libs/sky130A.tech lef read tmp/merged.nom.lef def read results/routing/picorv32a.def & 
+```
+
+magic -T /home/niharika/vsdstdcelldesign/libs/sky130A.tech lef read /home/niharika/OpenLane/designs/picorv32a/runs/RUN_2023.09.18_11.46.06/tmp/merged.nom.lef def read /home/niharika/OpenLane/designs/picorv32a/runs/RUN_2023.09.18_11.46.06/results/routing/picorv32a.def &
+```
+
 
  ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/f019e182-30d4-4046-9678-c249de688778)
 
