@@ -734,38 +734,36 @@ port VGND use ground    //select VGND
 ```
 Creating a lef file : type this command **lef write** in the tckon window, we will see a lef file in the /home/niharika/vsdstdcelldesign directory
 
-![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/e1539e6a-9b05-4b04-9a3d-0980089ddfd4)
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/3a2fe531-a13f-4dc8-a80b-10f4d16a59d2)
+
 
 
 Steps to include custom cell in ASIC:
 
 * We have created a custom standard cell in previous steps of an inverter. 
-* Now we copy lef file, sky130_fd_sc_hd_typical.lib, sky130_fd_sc_hd_slow.lib & sky130_fd_sc_hd_fast.lib to src folder of picorv32a from libs folder vsdstdcelldesign. Then modify the config.tcl as follows
+* Now we copy lef file, sky130_fd_sc_hd_typical.lib, sky130_fd_sc_hd_slow.lib & sky130_fd_sc_hd_fast.lib to src folder of picorv32a from libs folder vsdstdcelldesign. Then modify the config.json as follows
 
 ```
-# Design
-set ::env(DESIGN_NAME) "picorv32a"
-
-set ::env(VERILOG_FILES) "./designs/picorv32a/src/picorv32a.v"
-set ::env(SDC_FILES) "./designs/picorv32a/src/picorv32a.sdc"
-
-
-set ::env(CLOCK_PERIOD) "5.000"
-set ::env(CLOCK_PORT) "clk"
-
-set ::env(CLOCK_MET) $::env(CLOCK_PORT) 
-
-
-set ::env(LIB_SYNTH) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib "
-set ::env(LIB_MIN) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__fast.lib"
-set ::env(LIB_MAX) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__slow.lib "
-set ::env(LIB_TYPICAL) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib"
-
-set ::env(EXTRA_LEFS) [glob $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/src/*.lef]   ## this is the new line added to the existing config.tcl file
-
-set filename $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/$::env(PDK)_$::env(STD_CELL_LIBRARY)_config.tcl
-if { [file exists $filename] == 1 } {
-  source $filename
+{
+  "DESIGN_NAME": "picorv32",
+  "VERILOG_FILES": "dir::src/picorv32a.v",
+  "CLOCK_PORT": "clk",
+  "CLOCK_NET": "clk",
+  "FP_SIZING": "relative",
+  "GLB_RESIZER_TIMING_OPTIMIZATIONS": true,
+  "LIB_SYNTH" : "dir::src/sky130_fd_sc_hd__typical.lib",
+  "LIB_FASTEST" : "dir::src/sky130_fd_sc_hd__fast.lib",
+  "LIB_SLOWEST" : "dir::src/sky130_fd_sc_hd__slow.lib",
+  "LIB_TYPICAL":"dir::src/sky130_fd_sc_hd__typical.lib",
+  "TEST_EXTERNAL_GLOB":"dir::/src/*",
+  "SYNTH_DRIVING_CELL":"sky130_vsdinv",
+  "pdk::sky130*": {
+    "FP_CORE_UTIL": 35,
+    "CLOCK_PERIOD": 24,
+    "scl::sky130_fd_sc_hd": {
+      "FP_CORE_UTIL": 30
+    }
+  }
 }
 ```
 
@@ -786,7 +784,19 @@ We can see changes in the synthesis file :
 
 
 
-![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/da9e875d-eada-4f9d-beba-4659f08db211)
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/9df1a85d-f38c-4665-868c-beeaa22fd95a)
+
+
+after doing placement and flooplan we can view our placement in magic using:
+
+```
+niharika@niharika-HP-Pavilion-Laptop-15-eh1xxx:~/vsdstdcelldesign$  magic -T /home/niharika/vsdstdcelldesign/libs/sky130A.tech lef read /home/niharika/OpenLane/designs/picorv32a/runs/RUN_2023.09.18_11.46.06/tmp/merged.nom.lef def read /home/niharika/OpenLane/designs/picorv32a/runs/RUN_2023.09.18_11.46.06/results/placement/picorv32a.def &
+```
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/46ea324d-ae36-4fb9-8170-0a641542f2f7)
+
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/e0a656b7-499c-40ec-87b1-b967d83c952a)
+
 
 **Delay Tables**
 
@@ -866,17 +876,7 @@ Shielding is done so as to prevent gltch. Shields are connected to VDD or GND. T
 
 Before attempting to run CTS in TritonCTS tool, if the slack was attempted to be reduced in previous run, the netlist may have gotten modified by cell replacement techniques. Therefore, the verilog file needs to be modified using the write_verilog command. Then, the synthesis, floorplan and placement is run again. To run CTS use the command: **run_cts**
 
-We observe that both values are postive, hence there is no violation
 
-![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/7a2d9d2a-7ca4-4ce4-a66a-9d289eea66a8)
-
-clock is propagated, so, we do timing analysis with real clocks. From now post cts analysis is performed by operoad within the openlane flow In openroad, execute the following commands:
-
-
-![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/34f51812-78ae-44b7-a294-80c433b71aca)
-
-
-![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/1adba820-2d06-41f4-b1bb-8672cb8930b6)
 
 
 Clock skew is chekced using the following command : **report clock_skew -setup**
