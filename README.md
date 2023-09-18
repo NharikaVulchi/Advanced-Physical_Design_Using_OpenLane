@@ -801,6 +801,7 @@ Now we see the custom cell in our placement:
 
 ![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/47f18711-0647-49fc-a915-015544437620)
 
+![image](https://github.com/NharikaVulchi/Advanced-Physical_Design_Using_OpenLane/assets/83216569/f52d8b50-56f3-4d4c-b5a5-311d639a83b2)
 
 
 **Delay Tables**
@@ -881,8 +882,21 @@ Shielding is done so as to prevent gltch. Shields are connected to VDD or GND. T
 
 Before attempting to run CTS in TritonCTS tool, if the slack was attempted to be reduced in previous run, the netlist may have gotten modified by cell replacement techniques. Therefore, the verilog file needs to be modified using the write_verilog command. Then, the synthesis, floorplan and placement is run again. To run CTS use the command: **run_cts**
 
+ We use OpenROAD within the openLANE flow tp analyse Setup and hold time slacks :
 
 
+```
+ openroad
+read_lef /home/niharika/OpenLane/designs/picorv32a/runs/RUN_2023.09.18_11.46.06/tmp/merged.nom.lef
+read_def /home/niharika/OpenLane/designs/picorv32a/runs/RUN_2023.09.18_11.46.06/results/cts/picorv32a.def
+read_verilog /home/niharika/OpenLane/designs/picorv32a/runs/RUN_2023.09.18_11.46.06/results/synthesis/picorv32a.v
+write_db pico_cts.db
+link_design picorv32a
+read_liberty $::env(LIB_SYNTH_COMPLETE)
+read_sdc /home/niharika/OpenLane/designs/picorv32a/src/my_base.sdc
+set_propagated_clock (all_clocks)
+report_checks -path_delay min_max -format full_clock_expanded -digits 4
+```
 
 Clock skew is chekced using the following command : **report clock_skew -setup**
 
